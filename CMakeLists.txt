@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.28)
+
 project(relog
     DESCRIPTION "Training project. The goal is to recreate spdlog from screatch."
-    VERSION 0.1.0
     LANGUAGES CXX)
 
+include(cmake/get_version_from_git.cmake)
+get_version_from_git()
+    
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -25,7 +28,6 @@ option(RELOG_SANITIZE_THREAD "Enable thread sanitizer in tests" OFF)
 option(RELOG_INSTALL "Generate target for installing relog" ${PROJECT_IS_TOP_LEVEL})
 set_if_undefined(RELOG_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/relog" CACHE STRING
     "Install path for relog package-related CMake files")
-
 
 if(DEFINED RELOG_SHARED_LIBS)
 set(BUILD_SHARED_LIBS ${RELOG_SHARED_LIBS})
@@ -59,9 +61,16 @@ endif()
 
 generate_export_header(relog EXPORT_FILE_NAME include/relog/${export_file_name})
 
+configure_file(
+    ${CMAKE_SOURCE_DIR}/cmake/version.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/include/relog/version.h
+)
+message(STATUS "PROJECT_VERSION: ${PROJECT_VERSION}")
+
 set(sources
     include/relog/export.h
     include/relog/relog.h
+    include/relog/version.h
     src/relog.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
 

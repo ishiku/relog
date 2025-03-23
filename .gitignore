@@ -538,4 +538,11 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# Dependency directories
+node_modules/
+package-lock.json
+package.json
+commitlint.config.js
+.husky/*
+
 # End of https://www.toptal.com/developers/gitignore/api/c++,cmake,git,vim,visualstudiocode,visualstudio,linux,windows

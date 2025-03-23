@@ -1,0 +1,15 @@
+#ifndef RELOG_VERSION_H
+#define RELOG_VERSION_H
+
+#define RELOG_VER_MAJOR @PROJECT_VERSION_MAJOR @
+#define RELOG_VER_MINOR @PROJECT_VERSION_MINOR @
+#define RELOG_VER_PATCH @PROJECT_VERSION_PATCH @
+#define RELOG_VER "@PROJECT_VERSION@"
+#define RELOG_VER_FULL "@FULL_VERSION@"
+
+#define RELOG_TO_VERSION(major, minor, patch)                                  \
+  (major * 10000 + minor * 100 + patch)
+#define RELOG_VERSION                                                          \
+  RELOG_TO_VERSION(RELOG_VER_MAJOR, RELOG_VER_MINOR, RELOG_VER_PATCH)
+
+#endif
